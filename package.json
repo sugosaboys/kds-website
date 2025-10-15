@@ -1,4 +1,4 @@
-{
+  {
   "name": "kds-website",
   "type": "module",
   "private": true,
@@ -10,6 +10,7 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@nuxt/image": "^1.11.0",
     "@tailwindcss/vite": "^4.1.14",
     "dotenv": "^17.2.3",
     "nuxt": "^4.1.3",

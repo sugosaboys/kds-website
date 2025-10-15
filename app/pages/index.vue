@@ -16,6 +16,9 @@ interface HomepageResponse {
 }
 
 const {data} = await useFetch<HomepageResponse>(`${contentFetching}/api/homepage`,{
+    server:true,
+    lazy:false,
+    key:'homepage',
     query:{
         'populate[navbar][populate]':'*',
         'populate[content][populate]':'*',
@@ -27,9 +30,10 @@ const content = computed(() => data.value?.data.content);
 console.log(data.value)
 </script>
 
+
 <template>
-   <NavbarComponent v-if="Navbar" :Navbar="Navbar"/>
-   <div v-for="heroSection in content">
+ <NavbarComponent v-if="Navbar" :Navbar="Navbar"/>
+   <!-- <div v-for="heroSection in content">
         <h4>{{ heroSection.HeroText }}</h4>
-   </div>
+   </div> -->
 </template>

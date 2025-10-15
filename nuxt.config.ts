@@ -8,6 +8,9 @@ export default defineNuxtConfig({
       tailwindcss(),
     ],
   },
+  modules: [
+    '@nuxt/image'
+  ],
   runtimeConfig:{
     public:{
       CONTENT: process.env.API_ACCESS
