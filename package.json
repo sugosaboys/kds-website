@@ -1,4 +1,4 @@
-  {
+{
   "name": "kds-website",
   "type": "module",
   "private": true,
@@ -17,5 +17,8 @@
     "tailwindcss": "^4.1.14",
     "vue": "^3.5.22",
     "vue-router": "^4.5.1"
+  },
+  "devDependencies": {
+    "nuxt-keen-slider": "^1.1.1"
   }
 }

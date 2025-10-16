@@ -9,7 +9,8 @@ export default defineNuxtConfig({
     ],
   },
   modules: [
-    '@nuxt/image'
+    '@nuxt/image',
+    'nuxt-keen-slider'
   ],
   runtimeConfig:{
     public:{
