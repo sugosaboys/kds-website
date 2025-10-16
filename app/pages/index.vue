@@ -74,28 +74,36 @@ const content = computed(() => data.value?.data.content);
 const Footer = computed(()=> data.value?.data.Footer);
 
 const currentSlide = ref(0);
-const dotCount = ref(0);
+const totalPages  = ref(0);
+const perView = 2;
+const spacing = 24;
 
 const [sliderRef,slider] = useKeenSlider({
     slides:{
-        perView:2,
-        spacing:24,
+        origin:"center",
+        perView,
+        spacing,
     },
+    initial:1,
     mode:'free',
     loop:false,
-    created(s){
-        dotCount.value = s.track.details.slides.length;
-    },
-    slideChanged(s){
-        currentSlide.value = s.track.details.rel;
-    },
+    slideChanged(sliderInstance) {
+    currentSlide.value = Math.floor(sliderInstance.track.details.rel / perView);
+  } ,
+   created(sliderInstance) {
+    const totalSlides = sliderInstance.slides.length;
+    totalPages.value = Math.ceil(totalSlides / perView);
+  } ,
 });
 
-const goToSlide = (idx:number) => {
-    if(slider.value){
-        slider.value.moveToIdx(idx);
-    }
-}
+const goTo = (pageIndex: number) => {
+  slider.value?.moveToIdx(pageIndex * perView);
+};
+
+onBeforeUnmount(() => {
+  slider.value?.destroy();
+});
+
 
 const nextSlide = () => slider.value?.next();
 const prevSlide = () => slider.value?.prev();
@@ -139,9 +147,9 @@ useHead({
                 </svg>
                 <div class="flex gap-2">
                     <button
-                   v-for="i in dotCount"
+                   v-for="i in totalPages"
                    :key="i"
-                   @click="goToSlide(i - 1)"
+                   @click="goTo(i - 1)"
                    class="w-3 h-3 rounded-full transition-all"
                    :class="currentSlide === i - 1 ? 'bg-[#6F4E37] scale-60' : 'bg-[#d6d6d6] scale-60'"
                    ></button>
