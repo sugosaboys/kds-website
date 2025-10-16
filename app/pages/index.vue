@@ -39,6 +39,12 @@ interface MenuTheme{
     }
 }
 
+interface SEO {
+    MetaTitle:string;
+    MetaDescription:string;
+    MetaKeywords:string;
+}
+
 type ContentSection = HeroSection | leftTheme | MenuTheme | sliderTheme;
 
 interface HomepageResponse {
@@ -46,6 +52,7 @@ interface HomepageResponse {
         navbar: any;
         content:ContentSection[];
         Footer:any;
+        seo:SEO;
     };
 }
 
@@ -57,6 +64,7 @@ const {data} = await useFetch<HomepageResponse>(`${contentFetching}/api/homepage
         'populate[navbar][populate]':'*',
         'populate[content][populate]':'*',
         'populate[Footer][populate]':'*',
+        'populate[seo][populate]':'*',
          
     }
 });
@@ -93,10 +101,10 @@ const nextSlide = () => slider.value?.next();
 const prevSlide = () => slider.value?.prev();
 
 useHead({
-    title:'Kopi Deket Sini',
+    title:data.value?.data.seo.MetaTitle || '',
     meta:[
-        {name:'description',content:''},
-        {name:'keywords',content:''},
+        {name:'description',content:data.value?.data.seo.MetaDescription || ''},
+        {name:'keywords',content:data.value?.data.seo.MetaKeywords || ''},
     ],
     link:[{rel:'icon', type:'image/png', href:'/kopi-deket-sini.png'}]
 })
