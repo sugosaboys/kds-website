@@ -73,8 +73,8 @@ const subNavbar = computed(()=> Navbar.value?.subNavbar);
 const content = computed(() => data.value?.data.content);
 const Footer = computed(()=> data.value?.data.Footer);
 
-const currentSlide = ref(0);
-const totalPages  = ref(0);
+// const currentSlide = ref(0);
+// const totalPages  = ref(0);
 const perView = 2;
 const spacing = 24;
 
@@ -86,23 +86,23 @@ const [sliderRef,slider] = useKeenSlider({
     },
     initial:1,
     mode:'free',
-    loop:false,
-    slideChanged(sliderInstance) {
-    currentSlide.value = Math.floor(sliderInstance.track.details.rel / perView);
-  } ,
-   created(sliderInstance) {
-    const totalSlides = sliderInstance.slides.length;
-    totalPages.value = Math.ceil(totalSlides / perView);
-  } ,
+    loop:true,
+//     slideChanged(sliderInstance) {
+//     currentSlide.value = Math.floor(sliderInstance.track.details.rel / perView);
+//   } ,
+//    created(sliderInstance) {
+//     const totalSlides = sliderInstance.slides.length;
+//     totalPages.value = Math.ceil(totalSlides / perView);
+//   } ,
 });
 
-const goTo = (pageIndex: number) => {
-  slider.value?.moveToIdx(pageIndex * perView);
-};
+// const goTo = (pageIndex: number) => {
+//   slider.value?.moveToIdx(pageIndex * perView);
+// };
 
-onBeforeUnmount(() => {
-  slider.value?.destroy();
-});
+// onBeforeUnmount(() => {
+//   slider.value?.destroy();
+// });
 
 
 const nextSlide = () => slider.value?.next();
@@ -145,7 +145,7 @@ useHead({
                 <svg width="30" height="30" viewBox="0 0 10 16" @click="prevSlide" class="hover:bg-[#f0e4d3] p-1 cursor-pointer" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M7.75697 16L9.5 14.3134L2.9664 8L9.5 1.6866L7.75203 0L1.22337 6.3134C0.760196 6.76076 0.5 7.36743 0.5 8C0.5 8.63257 0.760196 9.23923 1.22337 9.68659L7.75697 16Z" fill="#6F4E37"/>
                 </svg>
-                <div class="flex gap-2">
+                <!-- <div class="flex gap-2">
                     <button
                    v-for="i in totalPages"
                    :key="i"
@@ -153,7 +153,7 @@ useHead({
                    class="w-3 h-3 rounded-full transition-all"
                    :class="currentSlide === i - 1 ? 'bg-[#6F4E37] scale-60' : 'bg-[#d6d6d6] scale-60'"
                    ></button>
-                </div>
+                </div> -->
                 <svg width="30" height="30" viewBox="0 0 10 16" @click="nextSlide" class="hover:bg-[#f0e4d3] p-1 cursor-pointer" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M2.24303 16L0.5 14.3134L7.0336 8L0.5 1.6866L2.24797 0L8.77663 6.3134C9.2398 6.76076 9.5 7.36743 9.5 8C9.5 8.63257 9.2398 9.23923 8.77663 9.68659L2.24303 16Z" fill="#6F4E37"/>
                 </svg>
