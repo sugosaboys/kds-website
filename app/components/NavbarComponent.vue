@@ -30,9 +30,17 @@ watch(()=> route.hash,(newHash)=>{
 },{immediate:true})
 
 const isToggle = ref(true);
-const toggleMenu = () => {
+const toggleMenu = (e:MouseEvent) => {
+    e.stopPropagation()
     isToggle.value = !isToggle.value;
 }
+
+onMounted(() => {
+  window.addEventListener('click', () => {
+    showSubNavbar.value = false;
+    isToggle.value = true;
+  })
+})
 </script>
 
 <template>
@@ -49,7 +57,7 @@ const toggleMenu = () => {
                     <a :href="Links.navlinks" class="heebo font-bold text-[14px] relative inline-block after:transition-all after:duration-300 after:absolute after:content-[''] after:bg-black after:bottom-0 after:left-0 after:w-0 after:h-[0.5px] hover:after:w-full">{{ Links.label }}</a>
                 </span>
             </nav>
-            <div :class="['absolute top-15 right-14 transition-all duration-300 ', showSubNavbar ? 'opacity-100 z-10 pointer-events-auto' : 'opacity-0 pointer-events-none']">
+            <div :class="['fixed bottom-0 md:absolute md:top-15 md:right-14 transition-all duration-300 ', showSubNavbar ? 'opacity-100 z-10 pointer-events-auto' : 'opacity-0 pointer-events-none']">
                 <main class="flex flex-col gap-3 bg-white rounded-sm w-[120px] p-3">
                     <span v-for="subNavbar in Navbar.subNavbar">
                         <a :href="subNavbar.navlinks" class="heebo font-bold text-[14px]">{{ subNavbar.label }}</a>

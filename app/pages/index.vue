@@ -129,14 +129,14 @@ useHead({
     </section>
      <!--Carousel-->
     <section id="about" v-if="section.__component === 'carousels.slider-theme'">
-        <span class="flex flex-col justify-center items-center gap-8 pt-40">
+        <span class="flex flex-col justify-center items-center gap-8 px-8 pt-40">
             <h4 class="text-[20px] heebo font-bold text-center">{{section.Title}}</h4>
             <p class="heebo text-center w-auto md:w-[640px]">{{ section.description }}</p>
         </span>
         <main class="flex justify-center pt-14 pb-10">
-            <div ref="sliderRef" class="keen-slider h-[490px]">
+            <div ref="sliderRef" class="keen-slider h-auto md:h-[490px]">
                 <div v-for="(item, i) in section.image" :key="i" class="keen-slider__slide number-slide1">
-                    <NuxtImg :src="item.url" class="w-[736px] h-full object-cover"/>
+                    <NuxtImg :src="item.url" class="w-[736px] h-[200px] md:h-full object-cover"/>
                 </div>
             </div>
         </main>
@@ -162,14 +162,14 @@ useHead({
     </section>
      <!--content with -->
    <section v-if="section.__component === 'contentwith-media.left-theme'" class="flex flex-col-reverse md:flex-row justify-between items-center">
-    <div class="relative flex flex-col justify-center items-center px-20 gap-8 bg-[#dcc5b2] w-full h-[480px]">
+    <div class="relative flex flex-col justify-center items-center px-8 md:px-20 gap-8 bg-[#dcc5b2] w-full h-[480px]">
         <h4 class="text-[32px] heebo font-bold text-center">{{section.Title}}</h4>
         <p class="heebo text-center">{{ section.description }}</p>
     </div>
     <NuxtImg :src="section.image.url" :alt="section.image.name" class="w-full h-[480px] object-cover"/>
   </section>
    <!--Menu-->
-  <section id="menu" v-if="section.__component === 'menu.menu-theme1'" class="flex flex-col justify-center items-center px-30 py-40 gap-8">
+  <section id="menu" v-if="section.__component === 'menu.menu-theme1'" class="flex flex-col justify-center items-center px-8 md:px-30 py-40 gap-8">
     <h4 class="text-[20px] heebo font-bold text-center">{{section.Title}}</h4>
     <p class="heebo text-center w-auto md:w-[640px]">{{ section.description }}</p>
     <NuxtImg :src="section.ListMenu.url" :alt="section.ListMenu.name"/>

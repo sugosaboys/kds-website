@@ -32,25 +32,25 @@ interface Address{
     <div class="absolute inset-0 px-8 md:px-30 py-40 flex flex-col md:flex-row justify-between items-start text-white w-full">
         <h4 class="text-[32px] heebo font-bold">Connect With Us</h4>
         <main class="flex flex-col gap-8">
-            <div class="flex gap-10">
+            <div class="flex flex-col md:flex-row gap-3 md:gap-10">
                 <p class="heebo font-medium w-40">Opening Hours</p>
-                <div class="heebo flex flex-col gap-3">
+                <div class="heebo flex flex-col md:gap-3">
                     <p>Everyday</p>
                     <p>10.00 am - 11.00 pm</p>
                 </div>
             </div>
-            <div class="flex gap-10">
+            <div class="flex flex-col md:flex-row gap-3 md:gap-10">
                 <p class="heebo font-medium w-40">Address</p>
                 <div class="flex flex-col gap-3">
-                    <p class="heebo w-[362px]">{{Footer.Address.label}}</p>
+                    <p class="heebo w-auto md:w-[362px]">{{Footer.Address.label}}</p>
                      <a :href="Footer.Address.navlinks" class="transition-all duration-300 border-1 border-white rounded-lg py-2 px-2 w-[120px] heebo text-center hover:border-[#1a1612] hover:bg-[#1a1612]">Get Directions</a>
                 </div>
             </div>
-            <div class="flex gap-10">
+            <div class="flex flex-col md:flex-row gap-3 md:gap-10">
                 <p class="heebo font-medium w-40">Contact</p>
                 <p class="heebo">{{ Footer.Phone }}</p>
             </div>
-            <div class="flex gap-10">
+            <div class="flex flex-col md:flex-row gap-3 md:gap-10">
                 <p class="heebo font-medium w-40">Social Media</p>
                 <div class="flex gap-5">
                     <span v-for="socialMedia in Footer.SocialMedia">
