@@ -29,7 +29,7 @@ interface Address{
 <template>
    <footer class="relative">
     <NuxtImg :src="Footer.BackgroundImage.url" :alt="Footer.BackgroundImage.name" class="w-full h-[730px] object-cover brightness-40" />
-    <div class="absolute inset-0 px-8 md:px-30 py-40 flex flex-col md:flex-row justify-between items-start text-white w-full">
+    <div class="absolute inset-0 px-8 md:px-30 py-30 md:py-40 flex flex-col md:flex-row justify-between items-start text-white w-full">
         <h4 class="text-[32px] heebo font-bold">Connect With Us</h4>
         <main class="flex flex-col gap-8">
             <div class="flex flex-col md:flex-row gap-3 md:gap-10">
@@ -60,7 +60,7 @@ interface Address{
             </div>
         </main>
     </div>
-    <div class="bg-[#dcc5b2] py-2 text-center heebo">
+    <div class="bg-[#dcc5b2] py-3 text-center heebo">
         <nuxt-link :to="Footer.FooterBottomURL">© 2025 Kopi Deket Sini</nuxt-link>
     </div>
 </footer>

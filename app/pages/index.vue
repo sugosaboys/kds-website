@@ -75,14 +75,21 @@ const Footer = computed(()=> data.value?.data.Footer);
 
 // const currentSlide = ref(0);
 // const totalPages  = ref(0);
-const perView = 2;
-const spacing = 24;
 
 const [sliderRef,slider] = useKeenSlider({
     slides:{
         origin:"center",
-        perView,
-        spacing,
+        perView: 1,
+        spacing: 5,
+    },
+    breakpoints:{
+     "(min-width:768px)":{
+        slides:{
+            origin:"center",
+            perView: 2,
+            spacing: 24,
+        }
+     }
     },
     initial:1,
     mode:'free',
@@ -124,23 +131,23 @@ useHead({
  <div v-for="(section,index) in content" :key="index">
     <!--Hero-->
     <section v-if="section.__component === 'hero.theme1'" class="relative flex justify-center items-center">
-        <NuxtImg v-if="section.HeroImage?.url" :src="section.HeroImage.url" :alt="section.HeroImage.name" class="w-full h-full md:h-[830px] object-cover brightness-40"/>
-        <h1 class="absolute text-[#f0e4d3] text-[32px] md:text-[48px] text-center heebo font-bold">{{ section.HeroText }}</h1>
+        <NuxtImg v-if="section.HeroImage?.url" :src="section.HeroImage.url" :alt="section.HeroImage.name" class="w-full h-[100vh] md:h-[830px] object-cover brightness-40"/>
+        <h1 class="absolute text-[#f0e4d3] text-[24px] md:text-[48px] px-3 md:px-0 text-center heebo font-bold">{{ section.HeroText }}</h1>
     </section>
      <!--Carousel-->
     <section id="about" v-if="section.__component === 'carousels.slider-theme'">
-        <span class="flex flex-col justify-center items-center gap-8 px-8 pt-40">
+        <span class="flex flex-col justify-center items-center gap-8 px-8 pt-10 md:pt-40">
             <h4 class="text-[20px] heebo font-bold text-center">{{section.Title}}</h4>
             <p class="heebo text-center w-auto md:w-[640px]">{{ section.description }}</p>
         </span>
-        <main class="flex justify-center pt-14 pb-10">
+        <main class="flex justify-center pt-2 md:pt-14 pb-10">
             <div ref="sliderRef" class="keen-slider h-auto md:h-[490px]">
-                <div v-for="(item, i) in section.image" :key="i" class="keen-slider__slide number-slide1">
-                    <NuxtImg :src="item.url" class="w-[736px] h-[200px] md:h-full object-cover"/>
+                <div v-for="(item, i) in section.image" :key="i" class="keen-slider__slide number-slide1 p-5 md:p-0">
+                    <NuxtImg :src="item.url" class="w-[736px] h-[312px] md:h-full object-cover"/>
                 </div>
             </div>
         </main>
-        <div class="flex justify-center items-center pb-40">
+        <div class="flex justify-center items-center pb-14 md:pb-40">
             <span class="flex justify-between items-center w-[300px]">
                 <svg width="30" height="30" viewBox="0 0 10 16" @click="prevSlide" class="hover:bg-[#f0e4d3] p-1 cursor-pointer" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M7.75697 16L9.5 14.3134L2.9664 8L9.5 1.6866L7.75203 0L1.22337 6.3134C0.760196 6.76076 0.5 7.36743 0.5 8C0.5 8.63257 0.760196 9.23923 1.22337 9.68659L7.75697 16Z" fill="#6F4E37"/>
@@ -162,17 +169,17 @@ useHead({
     </section>
      <!--content with -->
    <section v-if="section.__component === 'contentwith-media.left-theme'" class="flex flex-col-reverse md:flex-row justify-between items-center">
-    <div class="relative flex flex-col justify-center items-center px-8 md:px-20 gap-8 bg-[#dcc5b2] w-full h-[480px]">
-        <h4 class="text-[32px] heebo font-bold text-center">{{section.Title}}</h4>
-        <p class="heebo text-center">{{ section.description }}</p>
+    <div class="relative flex flex-col justify-center items-center px-8 md:px-20 gap-8 bg-[#dcc5b2] w-full h-[300px] md:h-[480px]">
+        <h4 class="text-[24px] md:text-[32px] heebo font-bold text-center">{{section.Title}}</h4>
+        <p class="heebo text-[14px] md:text-[16px] text-center">{{ section.description }}</p>
     </div>
-    <NuxtImg :src="section.image.url" :alt="section.image.name" class="w-full h-[480px] object-cover"/>
+    <NuxtImg :src="section.image.url" :alt="section.image.name" class="w-full h-[300px] md:h-[480px] object-cover"/>
   </section>
    <!--Menu-->
-  <section id="menu" v-if="section.__component === 'menu.menu-theme1'" class="flex flex-col justify-center items-center px-8 md:px-30 py-40 gap-8">
+  <section id="menu" v-if="section.__component === 'menu.menu-theme1'" class="flex flex-col justify-center items-center px-8 md:px-30 py-14 md:py-40 gap-8">
     <h4 class="text-[20px] heebo font-bold text-center">{{section.Title}}</h4>
     <p class="heebo text-center w-auto md:w-[640px]">{{ section.description }}</p>
-    <NuxtImg :src="section.ListMenu.url" :alt="section.ListMenu.name"/>
+    <NuxtImg :src="section.ListMenu.url" :alt="section.ListMenu.name" class="w-full h-full"/>
  </section>
  </div>
  <FooterComponent :Footer="Footer"/>
