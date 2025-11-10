@@ -114,12 +114,12 @@ const [sliderRef,slider] = useKeenSlider({
 
 const nextSlide = () => slider.value?.next();
 const prevSlide = () => slider.value?.prev();
-
 useHead({
     title:data.value?.data.seo.MetaTitle || '',
     meta:[
         {name:'description',content:data.value?.data.seo.MetaDescription || ''},
         {name:'keywords',content:data.value?.data.seo.MetaKeywords || ''},
+        {name:'google-site-verification',content:'rPxoTE_NE0oM3ZgrdPr_jE_UkLTxV-gckOz8qREv4bw'}
     ],
     link:[{rel:'icon', type:'image/png', href:'/kopi-deket-sini.png'}]
 })
