@@ -61,10 +61,17 @@ const {data} = await useFetch<HomepageResponse>(`${contentFetching}/api/homepage
     lazy:false,
     key:'homepage',
     query:{
-        'populate[navbar][populate]':'*',
-        'populate[content][populate]':'*',
-        'populate[Footer][populate]':'*',
-        'populate[seo][populate]':'*',
+        'populate[navbar][populate][logo][fields]':'url,name',
+        'populate[navbar][populate][navlinks]':'*',
+        'populate[navbar][populate][subNavbar]':'*',
+        'populate[content][on][hero.theme1][populate][HeroImage][fields]':'url,name',
+        'populate[content][on][carousels.slider-theme][populate][image][fields]':'url,name',
+        'populate[content][on][contentwith-media.left-theme][populate][image][fields]':'url,name',
+        'populate[content][on][menu.menu-theme1][populate][ListMenu][fields]':'url,name',
+        'populate[Footer][populate][BackgroundImage][fields]':'url,name',
+        'populate[Footer][populate][SocialMedia]':'*',
+        'populate[Footer][populate][Address]':'*',
+        'populate':'seo',
          
     }
 });
@@ -117,12 +124,14 @@ const prevSlide = () => slider.value?.prev();
 useHead({
     title:data.value?.data.seo.MetaTitle || '',
     meta:[
-        {name:'description',content:data.value?.data.seo.MetaDescription || ''},
-        {name:'keywords',content:data.value?.data.seo.MetaKeywords || ''},
-        {name:'google-site-verification',content:'rPxoTE_NE0oM3ZgrdPr_jE_UkLTxV-gckOz8qREv4bw'}
-    ],
+         {name:'description',content:data.value?.data.seo.MetaDescription || ''},
+         {name:'keywords',content:data.value?.data.seo.MetaKeywords || ''},
+         {name:'google-site-verification',content:'rPxoTE_NE0oM3ZgrdPr_jE_UkLTxV-gckOz8qREv4bw'}
+     ],
     link:[{rel:'icon', type:'image/png', href:'/kopi-deket-sini.png'}]
 })
+
+console.log(data.value)
 </script>
 
 
