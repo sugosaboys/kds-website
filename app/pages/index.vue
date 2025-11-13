@@ -130,8 +130,6 @@ useHead({
      ],
     link:[{rel:'icon', type:'image/png', href:'/kopi-deket-sini.png'}]
 })
-
-console.log(data.value)
 </script>
 
 
