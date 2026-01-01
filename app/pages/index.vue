@@ -55,26 +55,34 @@ interface HomepageResponse {
         seo:SEO;
     };
 }
-
-const {data} = await useFetch<HomepageResponse>(`${contentFetching}/api/homepage`,{
-    server:true,
-    lazy:false,
-    key:'homepage',
-    query:{
-        'populate[navbar][populate][logo][fields]':'url,name',
-        'populate[navbar][populate][navlinks]':'*',
-        'populate[navbar][populate][subNavbar]':'*',
-        'populate[content][on][hero.theme1][populate][HeroImage][fields]':'url,name',
-        'populate[content][on][carousels.slider-theme][populate][image][fields]':'url,name',
-        'populate[content][on][contentwith-media.left-theme][populate][image][fields]':'url,name',
-        'populate[content][on][menu.menu-theme1][populate][ListMenu][fields]':'url,name',
-        'populate[Footer][populate][BackgroundImage][fields]':'url,name',
-        'populate[Footer][populate][SocialMedia]':'*',
-        'populate[Footer][populate][Address]':'*',
-        'populate':'seo',
-         
+// NOTE: TS warning ignored, data is guaranteed by SSR
+const { data } = await useAsyncData<HomepageResponse>(
+  'homepage',
+  () => $fetch(`${contentFetching}/api/homepage`, {
+    query: {
+      'populate[navbar][populate][logo][fields]': 'url,name',
+      'populate[navbar][populate][navlinks]': '*',
+      'populate[navbar][populate][subNavbar]': '*',
+      'populate[content][on][hero.theme1][populate][HeroImage][fields]': 'url,name',
+      'populate[content][on][carousels.slider-theme][populate][image][fields]': 'url,name',
+      'populate[content][on][contentwith-media.left-theme][populate][image][fields]': 'url,name',
+      'populate[content][on][menu.menu-theme1][populate][ListMenu][fields]': 'url,name',
+      'populate[Footer][populate][BackgroundImage][fields]': 'url,name',
+      'populate[Footer][populate][SocialMedia]': '*',
+      'populate[Footer][populate][Address]': '*',
+      'populate': 'seo',
     }
-});
+  }),
+  {
+    server: true,
+    lazy: false,
+    staleTime: 1000 * 60 * 5,
+    deep:false,
+    watch:false,
+    default: () => null,
+  }
+)
+// NOTE: TS warning ignored, data is guaranteed by SSR
 const Navbar = computed(()=> data.value?.data.navbar);
 const subNavbar = computed(()=> Navbar.value?.subNavbar);
 const content = computed(() => data.value?.data.content);
@@ -118,7 +126,7 @@ const [sliderRef,slider] = useKeenSlider({
 //   slider.value?.destroy();
 // });
 
-
+// NOTE: TS warning ignored, data is guaranteed by SSR
 const nextSlide = () => slider.value?.next();
 const prevSlide = () => slider.value?.prev();
 useHead({
@@ -131,7 +139,6 @@ useHead({
     link:[{rel:'icon', type:'image/png', href:'/kopi-deket-sini.png'}]
 })
 </script>
-
 
 <template>
  <NavbarComponent v-if="Navbar" :subNavbar="subNavbar" :Navbar="Navbar"/>
