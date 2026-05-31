@@ -28,7 +28,7 @@ interface Address{
 
 <template>
    <footer class="relative">
-    <NuxtImg :src="Footer.BackgroundImage.url" :alt="Footer.BackgroundImage.name" class="w-full h-[730px] object-cover brightness-40" />
+    <NuxtImg :src="Footer.BackgroundImage?.url" :alt="Footer.BackgroundImage.name" class="w-full h-[730px] object-cover brightness-40" />
     <div class="absolute inset-0 px-8 md:px-30 py-30 md:py-40 flex flex-col md:flex-row justify-between items-start text-white w-full">
         <h4 class="text-[32px] heebo font-bold">Connect With Us</h4>
         <main class="flex flex-col gap-8">

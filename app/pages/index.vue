@@ -56,32 +56,75 @@ interface HomepageResponse {
     };
 }
 // NOTE: TS warning ignored, data is guaranteed by SSR
+// const { data } = await useAsyncData<HomepageResponse>(
+//   'homepage',
+//   () => $fetch(`${contentFetching}/api/homepage`, {
+//     query: {
+//       'populate[navbar][populate][logo][fields]': 'url,name',
+//       'populate[navbar][populate][navlinks]': '*',
+//       'populate[navbar][populate][subNavbar]': '*',
+//       'populate[content][on][hero.theme1][populate][HeroImage][fields]': 'url,name',
+//       'populate[content][on][carousels.slider-theme][populate][image][fields]': 'url,name',
+//       'populate[content][on][contentwith-media.left-theme][populate][image][fields]': 'url,name',
+//       'populate[content][on][menu.menu-theme1][populate][ListMenu][fields]': 'url,name',
+//       'populate[Footer][populate][BackgroundImage][fields]': 'url,name',
+//       'populate[Footer][populate][SocialMedia]': '*',
+//       'populate[Footer][populate][Address]': '*',
+//       'populate': 'seo',
+//     }
+//   }),
+//   {
+//     server: true,
+//     lazy: false,
+//     staleTime: 1000 * 60 * 5,
+//     deep:false,
+//     watch:false,
+//     default: () => null,
+//   }
+// )
+
+// if (!data.value) {
+//   await navigateTo('/alternative', { redirectCode: 302 });
+// }
+
 const { data } = await useAsyncData<HomepageResponse>(
   'homepage',
-  () => $fetch(`${contentFetching}/api/homepage`, {
-    query: {
-      'populate[navbar][populate][logo][fields]': 'url,name',
-      'populate[navbar][populate][navlinks]': '*',
-      'populate[navbar][populate][subNavbar]': '*',
-      'populate[content][on][hero.theme1][populate][HeroImage][fields]': 'url,name',
-      'populate[content][on][carousels.slider-theme][populate][image][fields]': 'url,name',
-      'populate[content][on][contentwith-media.left-theme][populate][image][fields]': 'url,name',
-      'populate[content][on][menu.menu-theme1][populate][ListMenu][fields]': 'url,name',
-      'populate[Footer][populate][BackgroundImage][fields]': 'url,name',
-      'populate[Footer][populate][SocialMedia]': '*',
-      'populate[Footer][populate][Address]': '*',
-      'populate': 'seo',
+  async () => {
+    try {
+      return await $fetch(`${contentFetching}/api/homepage`, {
+        query: {
+          'populate[navbar][populate][logo][fields]': 'url,name',
+          'populate[navbar][populate][navlinks]': '*',
+          'populate[navbar][populate][subNavbar]': '*',
+          'populate[content][on][hero.theme1][populate][HeroImage][fields]': 'url,name',
+          'populate[content][on][carousels.slider-theme][populate][image][fields]': 'url,name',
+          'populate[content][on][contentwith-media.left-theme][populate][image][fields]': 'url,name',
+          'populate[content][on][menu.menu-theme1][populate][ListMenu][fields]': 'url,name',
+          'populate[Footer][populate][BackgroundImage][fields]': 'url,name',
+          'populate[Footer][populate][SocialMedia]': '*',
+          'populate[Footer][populate][Address]': '*',
+          'populate': 'seo',
+        }
+      })
+    } catch {
+      await navigateTo('/alternative', { redirectCode: 302 })
+      return null
     }
-  }),
+  },
   {
     server: true,
     lazy: false,
     staleTime: 1000 * 60 * 5,
-    deep:false,
-    watch:false,
+    deep: false,
+    watch: false,
     default: () => null,
   }
 )
+
+if (!data.value) {
+  await navigateTo('/alternative', { redirectCode: 302 })
+}
+
 // NOTE: TS warning ignored, data is guaranteed by SSR
 const Navbar = computed(()=> data.value?.data.navbar);
 const subNavbar = computed(()=> Navbar.value?.subNavbar);
@@ -145,7 +188,7 @@ useHead({
  <div v-for="(section,index) in content" :key="index">
     <!--Hero-->
     <section v-if="section.__component === 'hero.theme1'" class="relative flex justify-center items-center">
-        <NuxtImg v-if="section.HeroImage?.url" :src="section.HeroImage.url" :alt="section.HeroImage.name" class="w-full h-[100vh] md:h-[830px] object-cover brightness-40"/>
+        <NuxtImg v-if="section.HeroImage?.url" :src="section.HeroImage.url" :alt="section.HeroImage.name" class="w-full h-[100vh] md:h-[830px] object-cover brightness-40" loading="eager"/>
         <h1 class="absolute text-[#f0e4d3] text-[24px] md:text-[48px] px-3 md:px-0 text-center heebo font-bold">{{ section.HeroText }}</h1>
     </section>
      <!--Carousel-->
