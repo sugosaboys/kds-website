@@ -18,9 +18,9 @@ export default defineNuxtConfig({
     }
   },
   ssr:true,
-  nitro:{
-    prerender:{
-      routes: ['/'],
-    }
-  }
+  // nitro:{
+  //   prerender:{
+  //     routes: ['/'],
+  //   }
+  // }
 })
